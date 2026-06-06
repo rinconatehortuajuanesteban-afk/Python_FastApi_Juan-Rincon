@@ -1,23 +1,35 @@
 # API de Gestión de Clientes, Facturas y Transacciones
 
-## Descripción
+## Descripción General
 
-Esta aplicación es una API REST desarrollada con **FastAPI** que permite realizar operaciones CRUD (Crear, Consultar, Actualizar y Eliminar) sobre tres entidades principales:
+Este proyecto consiste en una API REST desarrollada con **FastAPI**, diseñada para gestionar información relacionada con clientes, facturas y transacciones mediante operaciones CRUD (Crear, Consultar, Actualizar y Eliminar).
 
-* Clientes
-* Facturas
-* Transacciones
+La aplicación permite administrar cada entidad a través de endpoints HTTP y utiliza modelos de datos definidos con **Pydantic** para validar la información recibida.
 
-La información se almacena temporalmente en memoria mediante listas de Python, por lo que los datos se pierden al reiniciar la aplicación.
+Actualmente, los datos se almacenan en memoria mediante listas de Python, por lo que no existe persistencia permanente y la información se pierde al reiniciar la aplicación.
 
 ---
 
 ## Tecnologías Utilizadas
 
-* Python 3.10+
+* Python 3.12
 * FastAPI
 * Pydantic
 * Uvicorn
+* Swagger UI
+* ReDoc
+
+---
+
+## Características Principales
+
+* Gestión de clientes.
+* Gestión de facturas.
+* Gestión de transacciones.
+* Validación automática de datos.
+* Documentación interactiva generada automáticamente.
+* Arquitectura basada en servicios REST.
+* Respuestas en formato JSON.
 
 ---
 
@@ -26,41 +38,47 @@ La información se almacena temporalmente en memoria mediante listas de Python, 
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/tu-repositorio.git
-cd tu-repositorio
+git clone https://github.com/rinconatehortuajuanesteban-afk/Python_FastApi_Juan-Rincon.git
+cd Python_FastApi_Juan-Rincon
 ```
 
-### 2. Crear entorno virtual (opcional)
+### 2. Crear el entorno virtual
 
 ```bash
 python -m venv venv
 ```
 
-Activar entorno virtual:
+### 3. Activar el entorno virtual
 
-**Windows**
+#### Windows (CMD)
 
 ```bash
-venv\Scripts\activate
+venv\Scripts\activate.bat
 ```
 
-**Linux/Mac**
+#### Windows (PowerShell)
 
-```bash
-source venv/bin/activate
+```powershell
+.\venv\Scripts\Activate.ps1
 ```
 
-### 3. Instalar dependencias
+#### Git Bash
 
 ```bash
-pip install fastapi uvicorn
+source venv/Scripts/activate
+```
+
+### 4. Instalar dependencias
+
+```bash
+pip install -r requirements.txt
 ```
 
 ---
 
 ## Ejecución del Proyecto
 
-Ejecutar el servidor con:
+Iniciar el servidor de desarrollo:
 
 ```bash
 uvicorn main:app --reload
@@ -68,10 +86,10 @@ uvicorn main:app --reload
 
 Donde:
 
-* `main` corresponde al nombre del archivo Python.
-* `app` es la instancia de FastAPI.
+* `main` corresponde al archivo principal de la aplicación.
+* `app` corresponde a la instancia de FastAPI.
 
-La API estará disponible en:
+Una vez iniciado el servidor, la aplicación estará disponible en:
 
 ```text
 http://127.0.0.1:8000
@@ -79,9 +97,9 @@ http://127.0.0.1:8000
 
 ---
 
-## Documentación Automática
+## Documentación de la API
 
-FastAPI genera documentación automáticamente.
+FastAPI genera documentación automática para facilitar las pruebas y el consumo de los servicios.
 
 ### Swagger UI
 
@@ -110,8 +128,6 @@ http://127.0.0.1:8000/redoc
 }
 ```
 
-### Campos
-
 | Campo    | Tipo   |
 | -------- | ------ |
 | id       | int    |
@@ -131,8 +147,6 @@ http://127.0.0.1:8000/redoc
   "cliente_id": 1
 }
 ```
-
-### Campos
 
 | Campo       | Tipo   |
 | ----------- | ------ |
@@ -154,8 +168,6 @@ http://127.0.0.1:8000/redoc
 }
 ```
 
-### Campos
-
 | Campo       | Tipo  |
 | ----------- | ----- |
 | id          | int   |
@@ -165,187 +177,83 @@ http://127.0.0.1:8000/redoc
 
 ---
 
-# Endpoints
+# Endpoints Disponibles
 
 ## Clientes
 
-### Crear cliente
-
-```http
-POST /clientes
-```
-
-### Obtener todos los clientes
-
-```http
-GET /clientes
-```
-
-### Obtener cliente por ID
-
-```http
-GET /clientes/{cliente_id}
-```
-
-### Actualizar cliente
-
-```http
-PUT /clientes/{cliente_id}
-```
-
-### Eliminar cliente
-
-```http
-DELETE /clientes/{cliente_id}
-```
+| Método | Endpoint               | Descripción                |
+| ------ | ---------------------- | -------------------------- |
+| POST   | /clientes              | Crear cliente              |
+| GET    | /clientes              | Obtener todos los clientes |
+| GET    | /clientes/{cliente_id} | Obtener cliente por ID     |
+| PUT    | /clientes/{cliente_id} | Actualizar cliente         |
+| DELETE | /clientes/{cliente_id} | Eliminar cliente           |
 
 ---
 
 ## Facturas
 
-### Crear factura
-
-```http
-POST /facturas
-```
-
-### Obtener todas las facturas
-
-```http
-GET /facturas
-```
-
-### Obtener factura por ID
-
-```http
-GET /facturas/{factura_id}
-```
-
-### Actualizar factura
-
-```http
-PUT /facturas/{factura_id}
-```
-
-### Eliminar factura
-
-```http
-DELETE /facturas/{factura_id}
-```
+| Método | Endpoint               | Descripción                |
+| ------ | ---------------------- | -------------------------- |
+| POST   | /facturas              | Crear factura              |
+| GET    | /facturas              | Obtener todas las facturas |
+| GET    | /facturas/{factura_id} | Obtener factura por ID     |
+| PUT    | /facturas/{factura_id} | Actualizar factura         |
+| DELETE | /facturas/{factura_id} | Eliminar factura           |
 
 ---
 
 ## Transacciones
 
-### Crear transacción
+| Método | Endpoint                        | Descripción                     |
+| ------ | ------------------------------- | ------------------------------- |
+| POST   | /transacciones                  | Crear transacción               |
+| GET    | /transacciones                  | Obtener todas las transacciones |
+| GET    | /transacciones/{transaccion_id} | Obtener transacción por ID      |
+| PUT    | /transacciones/{transaccion_id} | Actualizar transacción          |
+| DELETE | /transacciones/{transaccion_id} | Eliminar transacción            |
 
-```http
-POST /transacciones
-```
+---
 
-### Obtener todas las transacciones
+## Estructura del Proyecto
 
-```http
-GET /transacciones
-```
-
-### Obtener transacción por ID
-
-```http
-GET /transacciones/{transaccion_id}
-```
-
-### Actualizar transacción
-
-```http
-PUT /transacciones/{transaccion_id}
-```
-
-### Eliminar transacción
-
-```http
-DELETE /transacciones/{transaccion_id}
+```text
+Python_FastApi_Juan-Rincon/
+│
+├── main.py
+├── README.md
+├── requirements.txt
+├── .gitignore
+└── __pycache__/
 ```
 
 ---
 
-# Ejemplo de Uso
+## Limitaciones Actuales
 
-### Crear un Cliente
-
-**Solicitud**
-
-```http
-POST /clientes
-```
-
-```json
-{
-  "id": 1,
-  "nombre": "Juan Pérez",
-  "correo": "juan@email.com",
-  "telefono": "3001234567"
-}
-```
-
-**Respuesta**
-
-```json
-{
-  "mensaje": "Cliente creado",
-  "cliente": {
-    "id": 1,
-    "nombre": "Juan Pérez",
-    "correo": "juan@email.com",
-    "telefono": "3001234567"
-  }
-}
-```
-
----
-
-# Manejo de Errores
-
-Cuando un recurso no existe, la API responde con:
-
-```json
-{
-  "detail": "Cliente no encontrado"
-}
-```
-
-Código HTTP:
-
-```http
-404 Not Found
-```
-
----
-
-# Limitaciones Actuales
-
+* La información se almacena únicamente en memoria.
 * No existe persistencia en base de datos.
-* Los datos se almacenan únicamente en memoria.
-* No se valida la existencia de clientes antes de crear facturas.
-* No se valida la existencia de facturas antes de crear transacciones.
-* No existe autenticación ni autorización.
-* No se controlan registros duplicados.
+* No se implementa autenticación de usuarios.
+* No se validan relaciones entre entidades.
+* No existe control de registros duplicados.
 
 ---
 
-# Mejoras Futuras
+## Mejoras Futuras
 
 * Integración con PostgreSQL o MySQL.
-* Uso de SQLAlchemy.
-* Implementación de autenticación JWT.
-* Validación de relaciones entre entidades.
+* Implementación de SQLAlchemy.
+* Autenticación y autorización mediante JWT.
+* Validación de integridad referencial.
 * Paginación de resultados.
 * Registro de auditoría y logs.
-* Pruebas unitarias y de integración.
-* Despliegue mediante Docker.
+* Pruebas unitarias e integración.
+* Contenerización mediante Docker.
 
 ---
 
 ## Autor
 
-Proyecto desarrollado como práctica de construcción de APIs REST utilizando FastAPI y Pydantic.
+**Juan Esteban Rincón Atehortúa**
+
+Proyecto desarrollado como práctica académica para el aprendizaje de FastAPI, construcción de APIs REST y validación de datos con Pydantic.
