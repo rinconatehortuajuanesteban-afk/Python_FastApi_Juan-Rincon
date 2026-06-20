@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from models import Factura
-from database import facturas
+
+from app.modelos.facturas import Factura
+from app.conexion_bd import facturas
 
 router = APIRouter(
     prefix="/facturas",
@@ -38,7 +39,10 @@ def obtener_factura(factura_id: int):
 
 
 @router.put("/{factura_id}")
-def actualizar_factura(factura_id: int, factura_actualizada: Factura):
+def actualizar_factura(
+    factura_id: int,
+    factura_actualizada: Factura
+):
 
     for index, factura in enumerate(facturas):
 

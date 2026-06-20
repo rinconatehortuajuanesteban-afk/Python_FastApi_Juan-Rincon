@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from models import Transaccion
-from database import transacciones
+
+from app.modelos.transacciones import Transaccion
+from app.conexion_bd import transacciones
 
 router = APIRouter(
     prefix="/transacciones",

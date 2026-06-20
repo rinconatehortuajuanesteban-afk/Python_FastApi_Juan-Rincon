@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from models import Cliente
-from database import clientes
+
+from app.modelos.clientes import Cliente
+from app.conexion_bd import clientes
 
 router = APIRouter(
     prefix="/clientes",
@@ -10,7 +11,6 @@ router = APIRouter(
 
 @router.post("")
 def crear_cliente(cliente: Cliente):
-
     clientes.append(cliente)
 
     return {
@@ -38,12 +38,12 @@ def obtener_cliente(cliente_id: int):
 
 
 @router.put("/{cliente_id}")
-def actualizar_cliente(cliente_id: int, cliente_actualizado: Cliente):
+def actualizar_cliente(cliente_id: int,
+                        cliente_actualizado: Cliente):
 
-    for index, cliente in enumerate(clientes):
-
+    for i, cliente in enumerate(clientes):
         if cliente.id == cliente_id:
-            clientes[index] = cliente_actualizado
+            clientes[i] = cliente_actualizado
 
             return {
                 "mensaje": "Cliente actualizado",
@@ -59,10 +59,9 @@ def actualizar_cliente(cliente_id: int, cliente_actualizado: Cliente):
 @router.delete("/{cliente_id}")
 def eliminar_cliente(cliente_id: int):
 
-    for index, cliente in enumerate(clientes):
-
+    for i, cliente in enumerate(clientes):
         if cliente.id == cliente_id:
-            clientes.pop(index)
+            clientes.pop(i)
 
             return {
                 "mensaje": "Cliente eliminado"
