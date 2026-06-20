@@ -6,6 +6,6 @@ from app.enrutador.transacciones import router as transacciones_router
 
 app = FastAPI()
 
-app.include_router(clientes_router)
-app.include_router(facturas_router)
-app.include_router(transacciones_router)
+app.include_router(clientes_router, tags=["Clientes"], prefix="/clientes")
+app.include_router(facturas_router, tags=["Facturas"], prefix="/facturas")
+app.include_router(transacciones_router, tags=["Transacciones"], prefix="/transacciones")
